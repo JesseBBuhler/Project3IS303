@@ -4,42 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Put title here</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+
+    <style>
+        /*Top section with video and welcome text */
+        .topIntro{
+            width: 100%;
+            overflow: auto;
+        }
+        /* Add Song and Start Over Button Div*/
+        .introButton{
+            width: 100px;
+            height: 35px;
+            float: left;
+            bottom: 0px;
+        }
+        /* Add Song and Start Over Button Elements*/
+        .topButtons{
+            position: relative;
+            overflow: auto;
+            bottom: 0px;
+            margin: 10px;
+        }
+
+        /* Form Elements of the Add Song and Start Over Buttons*/
+        .introForm{
+            width: 10%;
+            float: left;
+        }
+
+        /* Don't Stop Believing Video Element*/
+        #believeSong{
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Welcoming Text and Video Intro Text*/
+        .introText{
+            display: inline-block;
+        }
+
+        /* Only Welcoming text*/
+        #WelcomeText{
+            font-size: 70px;
+            margin-top: 20px;
+            display: inline-block;
+            width: 70%;
+            text-align: center;
+        }
+
+        /* Don't Stop Believing Video Div*/
+        #believeText{
+            float: right;
+            margin: 10px;
+        }
+
+        /* Table Element*/
+        table{
+            width: 100%;
+        }
+
+        /* Table Headings*/
+        thead{
+            background-color: bisque;
+        }
+
+        /* Adds alternating colors to table rows*/
+        tr:nth-child(even)
+        {
+            background-color: #f2f2f2;
+        }
+
+        /* Individual elements in the table rows*/
+        td{
+            height: 40px;
+        }
+
+        /* Changes row color if the mouse is hovering over it*/
+        .hoverColor:hover{
+            background-color: yellow;
+        }
+
+        /* Aligns many things to the middle*/
+        .alignCenter{
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        /* Delete Button Styling*/
+        .deleteButton{
+            float: right;
+            vertical-align: middle;
+            margin-top: 8px;
+        }
+
+        /* Edit Button Styling*/
+        .editButton{
+            float: left;
+            vertical-align: middle;
+        }
+
+        /* Styles the input button elements: Add Song, Start Over, Delete, Edit*/
+        input{
+            background-color: burlywood;
+            border-radius: 8px;
+            color: white;
+            border: 2px solid black;
+        }
+    </style>
 </head>
 <body>
-    <form action="/AddSong" method="get">
-        <input type="submit" name="AddSong" value="Add">
-    </form>
-    <br>
-    <form action="/StartOver" method="post">
-        <input type="submit" name="StartOver" value="Start Over">
-    </form>
+    <div class="topIntro">
+            <h1 id="WelcomeText" class="introText">Welcome to a Song Database</h1>
+         <div id="believeText">
+            <h3 class="introText">Here's some music while you browse:</h3>
+            <br>
+            <iframe id="believeSong" width="200" height="115" src="https://www.youtube-nocookie.com/embed/1k8craCGpgs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <br>
+    </div>
+    <div class="topButtons">
+        <form action="/AddSong" method="get" class="introForm">
+            <input  class="introButton" type="submit" name="AddSong" value="Add Song">
+        </form>
+        
+        <form action="/StartOver" method="post" class="introForm">
+            <input  class="introButton" type="submit" name="StartOver" value="Start Over">
+        </form>
+    </div>
     <table>
         <thead>
             <tr>
-                <th></th>
-                <th>Song ID</th>
-                <th>Song Name</th>
-                <th>Artist ID</th>
-                <th>Year Released</th>
-                <th></th>
+                <th class="alignCenter"></th>
+                <th class="alignCenter">Song ID</th>
+                <th class="alignCenter">Song Name</th>
+                <th class="alignCenter">Artist ID</th>
+                <th class="alignCenter">Year Released</th>
+                <th class="alignCenter"></th>
             </tr>
         </thead>
 
         <tbody>
             <% for (var i = 0; i < importantInfo.length; i++) {%>
-                <tr>
+                <tr class="hoverColor">
                     <td>
                         <form action="/DeleteSong/<%= importantInfo[i].SongID%>" method="post">
-                            <input type="submit" name="Delete" value="Delete"/>
+                            <input class="deleteButton" type="submit" name="Delete" value="Delete"/>
                         </form>
                     </td>
-                    <td><%= importantInfo[i].SongID %></td>
-                    <td><%= importantInfo[i].SongName %></td>
-                    <td><%= importantInfo[i].ArtistID %></td>
-                    <td><%= importantInfo[i].YearReleased %></td>
-                    <td> <!--Figure out if you want this as a post or as a get-->
+                    <td class="alignCenter"><%= importantInfo[i].SongID %></td>
+                    <td class="alignCenter"><%= importantInfo[i].SongName %></td>
+                    <td class="alignCenter"><%= importantInfo[i].ArtistID %></td>
+                    <td class="alignCenter"><%= importantInfo[i].YearReleased %></td>
+                    <td class="alignCenter">
                         <form action="/EditSong/<%= importantInfo[i].SongID%>" method="get">
-                            <input type="submit" name="EditSong" value="Edit">
+                            <input class="editButton" type="submit" name="EditSong" value="Edit">
                         </form>
                     </td>
                 </tr>

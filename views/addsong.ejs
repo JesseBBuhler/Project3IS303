@@ -4,22 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AddRecord EJS</title>
+
+    <style>
+        h1{
+            text-align: center;
+        }
+        #mainForm{
+            margin: 20px;
+        }
+
+        #mainDiv{
+            text-align: center;
+        }
+
+        input{
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-    <form action="/AddSong" method="post">
-        <label for="Song_Name">Enter Song Name:</label>
-        <input id="Song_Name" type="text" name="SongName">
-        <br>
-        <label for="Artist_ID">Enter Artist ID:</label>
-        <input id="Artist_ID" type="text" name="ArtistID">
-        <br>
-        <label for="Year_Released">Year Released:</label>
-        <input id="Year_Released" type="text" name="YearReleased">
-        <br>
-        <input type="submit" value="Save">
-    </form>
-    <form action="/AddSong/Cancel" method="post">
-        <input type="submit" name="CancelAddition" value="Cancel">
-    </form>
+    
+    <h1>Add a new Song</h1>
+    <div id="mainDiv">
+        <form id="mainForm" action="/AddSong" method="post">
+            <div>
+                <label for="Song_Name">Enter Song Name:</label>
+                <br>
+                <input id="Song_Name" type="text" name="SongName">
+            </div>
+            <br>
+            <div>
+                <label for="Artist_ID">Enter Artist ID:</label>
+                <br>
+                <input id="Artist_ID" type="text" name="ArtistID">
+            </div>
+            <br>
+            <div>
+                <label for="Year_Released">Year Released:</label>
+                <br>
+                <input id="Year_Released" type="text" name="YearReleased">
+            </div>
+            <br>
+            <div>
+                <input type="submit" value="Save">
+            </div>
+        </form>
+        <form action="/AddSong/Cancel" method="post">
+            <input type="submit" name="CancelAddition" value="Cancel">
+        </form>
+    </div>
 </body>
 </html>
