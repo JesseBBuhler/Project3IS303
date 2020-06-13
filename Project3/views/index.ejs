@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myWebsite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css"/>
+</head>
+
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <form action="/AddSong" method="GET">
+                        <input type="submit" name="newSong" value="newSong">
+                    </form>
+                </th>
+                <th>Song ID</th>
+                <th>Song Name</th>
+                <th>ArtistID</th>
+                <th>Year Released</th>
+                <th>
+                    <form action="/StartOver" method="POST">
+                        <input type="submit" name="StartOver" value="Start Over">
+                    </form>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for(var i = 0; i < song.length; i++) {%>
+              <tr>
+                  <td>
+                    <form action="/DeleteSong/<%= song[i].SongID %>" method="post">
+                        <input type="submit" name="Delete" value="Delete" />
+                    </form>
+                  </td>
+                  <td><%= song[i].SongID %></td>
+                  <td><%= song[i].SongName %></td>
+                  <td><%= song[i].ArtistID %></td>
+                  <td><%= song[i].YearReleased %></td>
+                  <td>
+                    <form action="/EditSong/<%= song[i].SongID %>" method="GET">
+                        <input type="submit" name="Edit" value="Edit" />
+                    </form>
+                  </td>
+              </tr>  
+            <%}%>
+        </tbody>
+    </table>
+</body>
+</html>

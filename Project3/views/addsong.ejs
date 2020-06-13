@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Song</title>
+</head>
+<body>
+    <form action="/AddSong" method="post">
+        <label for="SongName">Enter Song Name: </label>
+        <input id="SongName" type="text" name="SongName">
+        <br>
+        <label for="ArtistID">Enter Artist: </label>
+        <input id="ArtistID" type="text" name="ArtistID">
+        <br>
+        <label for="YearReleased">Year Released: </label>
+        <input id="YearReleased" type="text" name="YearReleased">
+        <br>
+        <input type="submit" value="Save">
+    </form>
+
+    <form action="/" method="GET">
+        <input type="submit" value="Cancel">
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Song</title>
+    </head>
+    <body>
+        <form action="/EditSong/<%=id%>" method="POST">
+            <!--label for="StudnetID">Enter Student ID:</label>
+            <input id="StudentID" type="text" name="StudentID">
+            <br-->
+            <label for="SongName">Enter Song Name:</label>
+            <input id="SongName" type="text" name="SongName">
+            <br>
+            <label for="Artist">Enter Artist:</label>
+            <input id="ArtistID" type="text" name="ArtistID">
+            <br>
+            <label for="YearReleased">Year Released:</label>
+            <input id="YearReleased" type="text" name="YearReleased">
+            <br>
+            <input type="submit" value="Save">
+        </form>
+        <form action="/" method="GET">
+            <input type="submit" value="Cancel">
+        </form>
+    </body>
+</html>
