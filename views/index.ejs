@@ -14,6 +14,7 @@
                 <th>Song Name</th>
                 <th>Artist ID</th>
                 <th>Year Released</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -29,6 +30,11 @@
                     <td><%= importantInfo[i].SongName %></td>
                     <td><%= importantInfo[i].ArtistID %></td>
                     <td><%= importantInfo[i].YearReleased %></td>
+                    <td> <!--Figure out if you want this as a post or as a get-->
+                        <form action="/updateRecord/<%= importantInfo[i].SongID%>" method="post">
+                            <input type="submit" name="updateRecord" value="Edit">
+                        </form>
+                    </td>
                 </tr>
             <% }%>
         </tbody>

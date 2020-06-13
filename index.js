@@ -58,6 +58,32 @@ app.post("/addRecord", function(req, res){
     });
 });
 
+app.post("/updateRecord/:id", function (req, res){
+    res.render("updateRecord");
+});
+
+app.post("/updateRecord", function (req, res){
+    knex("Songs").where({SongID: req.body.SongID}).update({
+        SongName: req.body.SongName, ArtistID: req.body.ArtistID, YearReleased: req.body.YearReleased
+    }).then(function (importantInfo){
+        res.redirect("/");
+    });
+});
+
+app.get("/batch", function (req, res){
+    knex("Songs").insert(
+    [
+        {SongName: "I See Fire", ArtistID: "Ed Sheeran", YearReleased: "2015"},
+        {SongName: "Don't Stop Believing", ArtistID: "Journey", YearReleased: "1989"},
+        {SongName: "The Shire", ArtistID: "Howard Shore", YearReleased: "2002"},
+        {SongName: "The Last Goodbye", ArtistID: "LotR", YearReleased: "2017"}
+    ]
+    ).then(importantInfo => {
+        res.redirect("/");
+    });
+});
+
+
 //Listening method for port 3000 that keeps running after it is first executed
 app.listen(port, function(){
     //Now explain what function operations execute on port 3000
