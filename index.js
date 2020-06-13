@@ -33,82 +33,85 @@
 
 //Page Directing and Commands
 //Get route for the root directory
-app.get("/", function(req,res){
-    knex.select("SongID", "SongName", "ArtistID", "YearReleased").from("Songs").orderBy("SongID").then(function(songInfo){
-        res.render("index", {importantInfo: songInfo});
-    }).catch(function(err){
-        console.log(err);
-        res.status(500).json({err});
+    app.get("/", function(req,res){
+        knex.select("SongID", "SongName", "ArtistID", "YearReleased").from("Songs").orderBy("SongID").then(function(songInfo){
+            res.render("index", {importantInfo: songInfo});
+        }).catch(function(err){
+            console.log(err);
+            res.status(500).json({err});
+        });
     });
-});
 
 //Delete
-
-app.post("/DeleteSong/:id", function(req,res){
-    knex("Songs").where("SongID", req.params.id).del().then(function(importantInfo){
-        res.redirect("/");
-    }).catch(function(err){
-        console.log(err);
-        res.status(500).json({err});
+    app.post("/DeleteSong/:id", function(req,res){
+        knex("Songs").where("SongID", req.params.id).del().then(function(importantInfo){
+            res.redirect("/");
+        }).catch(function(err){
+            console.log(err);
+            res.status(500).json({err});
+        });
     });
-});
 
 //Add
-app.get("/AddSong", function(req, res){
-    res.render("AddSong");
-});
-
-app.post("/AddSong", function(req, res){
-    knex("Songs").insert(req.body).then(function(importantInfo){
-        res.redirect("/");
+    app.get("/AddSong", function(req, res){
+        res.render("AddSong");
     });
-});
 
-app.post("/AddSong/Cancel", function(req, res){
-    res.redirect("/");
-});
-
-//Edit
-app.get("/EditSong/:id", function (req, res){
-    knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").where("SongID", req.params.id).then(importantInfo => {
-        res.render("EditSong", {importantInfo: importantInfo});
-    });
-    /*knex("Songs").where("SongID", req.params.id).then(function(importantInfo){
-        res.render("EditSong");
-    });*/
-});
-
-app.post("/EditSong/:id", function (req, res){
-    knex("Songs").where({SongID: req.body.SongID}).update({
-        SongName: req.body.SongName, ArtistID: req.body.ArtistID, YearReleased: req.body.YearReleased
-    }).then(function (importantInfo){
-        res.redirect("/");
-    });
-});
-
-app.post("/EditSong/:id/Cancel", function (req, res){
-    res.redirect("/");
-});
-
-//Start Over
-
-app.post("/StartOver", function(req, res){
-    knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").del().then(function(){
-        knex("Songs").insert(
-            [
-                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"},
-                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"},
-                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"}
-            ]
-        ).then(function(){
+    app.post("/AddSong", function(req, res){
+        console.log(req.body.ArtistID);
+        req.body.ArtistID = req.body.ArtistID.toUpperCase();
+        knex("Songs").insert(req.body).then(function(importantInfo){
             res.redirect("/");
         });
     });
-});
+
+    /*app.post("/AddSong", function(req, res){
+        knex("Songs").insert(req.body).then(function(importantInfo){
+            res.redirect("/");
+        });
+    });*/
+
+    app.post("/AddSong/Cancel", function(req, res){
+        res.redirect("/");
+    });
+
+//Edit
+    app.get("/EditSong/:id", function (req, res){
+        knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").where("SongID", req.params.id).then(importantInfo => {
+            res.render("EditSong", {importantInfo: importantInfo});
+        });
+    });
+
+    app.post("/EditSong/:id", function (req, res){
+        knex("Songs").where({SongID: req.body.SongID}).update({
+            SongName: req.body.SongName, ArtistID: req.body.ArtistID, YearReleased: req.body.YearReleased
+        }).then(function (importantInfo){
+            res.redirect("/");
+        });
+    });
+
+    app.post("/EditSong/:id/Cancel", function (req, res){
+        res.redirect("/");
+    });
+
+//Start Over
+    app.post("/StartOver", function(req, res){
+        knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").del().then(function(){
+            knex("Songs").insert(
+                [
+                    {SongName: "Bohemian Rhapsody", ArtistID: "QUEEN", YearReleased: "1975"},
+                    {SongName: "Don't Stop Believing", ArtistID: "JOURNEY", YearReleased: "1981"},
+                    {SongName: "Hey Jude", ArtistID: "BEATLES", YearReleased: "1968"}
+                ]
+            ).then(function(){
+                res.redirect("/");
+            });
+        });
+    });
 
 //Listening
-//Listening method for port 3000 that keeps running after it is first executed
-app.listen(port, function(){
-    //Now explain what function operations execute on port 3000
-    console.log("I am now listening");
-})
+    //Listening method for port 3000 that keeps running after it is first executed
+    app.listen(port, function(){
+        //Now explain what function operations execute on port 3000
+        console.log("I am now listening");
+    });
