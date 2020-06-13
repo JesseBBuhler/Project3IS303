@@ -54,6 +54,10 @@ app.post("/EditSong", (req, res) => {
     });
 });
 
+app.get("/Cancel", (req, res) => {
+    res.render("index.ejs");
+});
+
 app.get("/", function(req, res){
     res.render("index");
 })
