@@ -6,6 +6,13 @@
     <title>Put title here</title>
 </head>
 <body>
+    <form action="/AddSong" method="get">
+        <input type="submit" name="AddSong" value="Add">
+    </form>
+    <br>
+    <form action="/StartOver" method="post">
+        <input type="submit" name="StartOver" value="Start Over">
+    </form>
     <table>
         <thead>
             <tr>
@@ -22,7 +29,7 @@
             <% for (var i = 0; i < importantInfo.length; i++) {%>
                 <tr>
                     <td>
-                        <form action="/DeleteRecord/<%= importantInfo[i].SongID%>" method="post">
+                        <form action="/DeleteSong/<%= importantInfo[i].SongID%>" method="post">
                             <input type="submit" name="Delete" value="Delete"/>
                         </form>
                     </td>
@@ -31,8 +38,8 @@
                     <td><%= importantInfo[i].ArtistID %></td>
                     <td><%= importantInfo[i].YearReleased %></td>
                     <td> <!--Figure out if you want this as a post or as a get-->
-                        <form action="/updateRecord/<%= importantInfo[i].SongID%>" method="post">
-                            <input type="submit" name="updateRecord" value="Edit">
+                        <form action="/EditSong/<%= importantInfo[i].SongID%>" method="get">
+                            <input type="submit" name="EditSong" value="Edit">
                         </form>
                     </td>
                 </tr>

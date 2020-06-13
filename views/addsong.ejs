@@ -6,7 +6,7 @@
     <title>AddRecord EJS</title>
 </head>
 <body>
-    <form action="/addRecord" method="post">
+    <form action="/AddSong" method="post">
         <label for="Song_Name">Enter Song Name:</label>
         <input id="Song_Name" type="text" name="SongName">
         <br>
@@ -17,6 +17,9 @@
         <input id="Year_Released" type="text" name="YearReleased">
         <br>
         <input type="submit" value="Save">
+    </form>
+    <form action="/AddSong/Cancel" method="post">
+        <input type="submit" name="CancelAddition" value="Cancel">
     </form>
 </body>
 </html>

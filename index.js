@@ -1,34 +1,37 @@
-//Brings in Express library, which is a node framework that simplifies http requests and routes and other things
-let express = require("express");
+//Bring in different libraries
+    //Brings in Express library, which is a node framework that simplifies http requests and routes and other things
+    let express = require("express");
 
-//Brings in the path module
-let path = require("path");
+    //Brings in the path module
+    let path = require("path");
 
-//Brings in body-Parser library used in the req extracting data from the request or form
-let bodyParser = require("body-parser");
+    //Brings in body-Parser library used in the req extracting data from the request or form
+    let bodyParser = require("body-parser");
 
-//Gives access to the knex library, which provides SQL in our app
-let knex = require("knex")({
-    client: "sqlite3",
-    connection: {
-        filename: "./MusicLibrary.db"
-    },
-    useNullAsDefault: true
-})
+    //Gives access to the knex library, which provides SQL in our app
+    let knex = require("knex")({
+        client: "sqlite3",
+        connection: {
+            filename: "./MusicLibrary.db"
+        },
+        useNullAsDefault: true
+    });
 
-//Stores a unique object of type express in the variable app
-let app = express();
+//Set up variables
+    //Stores a unique object of type express in the variable app
+    let app = express();
 
-//Allows us to use objects and arrays like JSON format
-app.use(bodyParser.urlencoded({extended: true}));
+    //Allows us to use objects and arrays like JSON format
+    app.use(bodyParser.urlencoded({extended: true}));
 
 
-//Use this variable for our port communication
-let port = 3000;
+    //Use this variable for our port communication
+    let port = 3000;
 
-//Specifies how html will by seen by setting the view engine as ejs
-app.set("view engine", "ejs");
+    //Specifies how html will by seen by setting the view engine as ejs
+    app.set("view engine", "ejs");
 
+//Page Directing and Commands
 //Get route for the root directory
 app.get("/", function(req,res){
     knex.select("SongID", "SongName", "ArtistID", "YearReleased").from("Songs").orderBy("SongID").then(function(songInfo){
@@ -39,7 +42,9 @@ app.get("/", function(req,res){
     });
 });
 
-app.post("/DeleteRecord/:id", function(req,res){
+//Delete
+
+app.post("/DeleteSong/:id", function(req,res){
     knex("Songs").where("SongID", req.params.id).del().then(function(importantInfo){
         res.redirect("/");
     }).catch(function(err){
@@ -48,21 +53,32 @@ app.post("/DeleteRecord/:id", function(req,res){
     });
 });
 
-app.get("/addRecord", function(req, res){
-    res.render("addRecord");
+//Add
+app.get("/AddSong", function(req, res){
+    res.render("AddSong");
 });
 
-app.post("/addRecord", function(req, res){
+app.post("/AddSong", function(req, res){
     knex("Songs").insert(req.body).then(function(importantInfo){
         res.redirect("/");
     });
 });
 
-app.post("/updateRecord/:id", function (req, res){
-    res.render("updateRecord");
+app.post("/AddSong/Cancel", function(req, res){
+    res.redirect("/");
 });
 
-app.post("/updateRecord", function (req, res){
+//Edit
+app.get("/EditSong/:id", function (req, res){
+    knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").where("SongID", req.params.id).then(importantInfo => {
+        res.render("EditSong", {importantInfo: importantInfo});
+    });
+    /*knex("Songs").where("SongID", req.params.id).then(function(importantInfo){
+        res.render("EditSong");
+    });*/
+});
+
+app.post("/EditSong/:id", function (req, res){
     knex("Songs").where({SongID: req.body.SongID}).update({
         SongName: req.body.SongName, ArtistID: req.body.ArtistID, YearReleased: req.body.YearReleased
     }).then(function (importantInfo){
@@ -70,20 +86,27 @@ app.post("/updateRecord", function (req, res){
     });
 });
 
-app.get("/batch", function (req, res){
-    knex("Songs").insert(
-    [
-        {SongName: "I See Fire", ArtistID: "Ed Sheeran", YearReleased: "2015"},
-        {SongName: "Don't Stop Believing", ArtistID: "Journey", YearReleased: "1989"},
-        {SongName: "The Shire", ArtistID: "Howard Shore", YearReleased: "2002"},
-        {SongName: "The Last Goodbye", ArtistID: "LotR", YearReleased: "2017"}
-    ]
-    ).then(importantInfo => {
-        res.redirect("/");
+app.post("/EditSong/:id/Cancel", function (req, res){
+    res.redirect("/");
+});
+
+//Start Over
+
+app.post("/StartOver", function(req, res){
+    knex.select("SongID","SongName","ArtistID","YearReleased").from("Songs").del().then(function(){
+        knex("Songs").insert(
+            [
+                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"},
+                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"},
+                {SongName: "Test", ArtistID: "TEst", YearReleased: "Test"}
+            ]
+        ).then(function(){
+            res.redirect("/");
+        });
     });
 });
 
-
+//Listening
 //Listening method for port 3000 that keeps running after it is first executed
 app.listen(port, function(){
     //Now explain what function operations execute on port 3000

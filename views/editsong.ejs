@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Record EJS</title>
+</head>
+<body>
+    <form action="/EditSong/:id" method="post">
+        <label for="Song_ID">Enter the Song ID</label>
+        <input id="Song_ID" type="text" name="SongID" value="<%= importantInfo[0].SongID %>">
+        <br>
+        <label for="Song_Name">Enter the Song Name:</label>
+        <input id="Song_Name" type="text" name="SongName" value="<%= importantInfo[0].SongName %>">
+        <br>
+        <label for="Artist_ID">Enter the Artist ID</label>
+        <input id="Artist_ID" type="text" name="ArtistID" value="<%= importantInfo[0].ArtistID %>">
+        <br>
+        <label for="Year_Released">Enter the Year the Song was Released:</label>
+        <input id="Year_Released" type="text" name="YearReleased" value="<%= importantInfo[0].YearReleased %>">
+        <br>
+            <input type="submit" name="SaveInputs" value="Save">
+        <br>
+    </form>
+    <form action="/EditSong/:id/Cancel" method="post">
+        <input type="submit" name="CancelInputs" value="Cancel">
+    </form>
+    <p>Hello! There should be ejs scripting right here: <%= importantInfo[0].SongID %></p>
+</body>
+</html>
