@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Song</title>
+        <style>
+            .save
+            {
+                background-color: royalblue;
+                font: bold;
+            }
+
+            body
+            {
+                background-color: gray;
+                position: absolute;
+                left: 15%;
+                right: 15%;  
+            }
+
+            html
+            {
+                background-color: navy;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/AddSong" method="post">
+            <label for="SongName">Enter Song Name:</label>
+            <input id="SongName" type="text" name="SongName">
+            <br>
+            <label for="ArtistID">Enter Artist Name:</label>
+            <input id="ArtistID" type="text" name="ArtistID">
+            <br>
+            <label for="YearReleased">Enter Year Released:</label>
+            <input id="YearReleased" type="text" name="YearReleased">
+            <br>
+            <input class="save" type="submit" value="Save">
+        </form>
+    </body>
+</html>

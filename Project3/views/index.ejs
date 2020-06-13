@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main Page</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css">
+        <style>
+            input
+            {
+                background-color: royalblue;
+                font: bold;
+            }
+
+            body
+            {
+                background-color: gray;
+                position: absolute;
+                left: 15%;
+                right: 15%; 
+                top: 0%;
+                bottom: 0%;
+                
+            }
+
+            html
+            {
+                background-color: navy;
+            }
+            /*.center
+            {
+                text-align: center;
+            }*/
+        </style>
+    </head>
+    <center>
+    <body class="center">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <form action="/AddSong" method="get">
+                            <input type="submit" name="Add" value="Add">
+                        </form>
+                    </th>
+                    <th>Song ID</th>
+                    <th>Song Name</th>
+                    <th>Artist ID</th>
+                    <th>Year Released</th>
+                    <th>
+                    <form action="/StartOver" method="post">
+                        <input type="submit" name="StartOver"  value="Start Over">
+                    </form>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% for(var i = 0; i < songs.length; i++) {%>
+                    <tr>
+                        <td>
+                            <form action="/DeleteSong/<%= songs[i].SongID %>" method="post">
+                                <input type="submit" name="Delete" value="Delete">
+                            </form>
+                        </td>
+                        <td><%= songs[i].SongID %></td>
+                        <td><%= songs[i].SongName %></td>
+                        <td><%= songs[i].ArtistID %></td>
+                        <td><%= songs[i].YearReleased %></td>
+                        <td>
+                            <form action="/EditSong" method="get">
+                                <input type="submit" name="Edit" value="Edit">
+                            </form>
+                        </td>
+                    </tr>
+                <% }%>
+            </tbody>
+        </table>
+    </body>
+    </center>
+</html>
