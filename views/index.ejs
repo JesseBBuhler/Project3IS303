@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Put title here</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>Song ID</th>
+                <th>Song Name</th>
+                <th>Artist ID</th>
+                <th>Year Released</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% for (var i = 0; i < importantInfo.length; i++) {%>
+                <tr>
+                    <td>
+                        <form action="/DeleteRecord/<%= importantInfo[i].SongID%>" method="post">
+                            <input type="submit" name="Delete" value="Delete"/>
+                        </form>
+                    </td>
+                    <td><%= importantInfo[i].SongID %></td>
+                    <td><%= importantInfo[i].SongName %></td>
+                    <td><%= importantInfo[i].ArtistID %></td>
+                    <td><%= importantInfo[i].YearReleased %></td>
+                </tr>
+            <% }%>
+        </tbody>
+    </table>
+</body>
+</html>
