@@ -1,26 +1,22 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Edit Song</title>
-    </head>
-    <body>
-        <form action="/EditSong/<%=id%>" method="POST">
-            <!--label for="StudnetID">Enter Student ID:</label>
-            <input id="StudentID" type="text" name="StudentID">
-            <br-->
-            <label for="SongName">Enter Song Name:</label>
-            <input id="SongName" type="text" name="SongName">
-            <br>
-            <label for="Artist">Enter Artist:</label>
-            <input id="ArtistID" type="text" name="ArtistID">
-            <br>
-            <label for="YearReleased">Year Released:</label>
-            <input id="YearReleased" type="text" name="YearReleased">
-            <br>
-            <input type="submit" value="Save">
-        </form>
-        <form action="/" method="GET">
-            <input type="submit" value="Cancel">
-        </form>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit</title>
+</head>
+<body>
+    <form action="/editSong"  method="POST">
+        <label for="SongName" >Enter Song Title</label>
+        <input id="SongName" type="text" name="SongName">
+        <br>
+        <label for="ArtistID" >Enter Artist Name</label>
+        <input id="ArtistID" type="text" name="ArtistID">
+        <br>
+        <label for="YearReleased" >Enter Year of Release</label>
+        <input id="YearReleased" type="number" name="YearReleased">
+        <br>
+        <input type="submit" value="Save">
+    </form>
+</body>
 </html>

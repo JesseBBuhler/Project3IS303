@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Song</title>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css"/>
 </head>
 <body>
-    <form action="/AddSong" method="post">
-        <label for="SongName">Enter Song Name: </label>
-        <input id="SongName" type="text" name="SongName">
+    <form action="/addSong" method="POST">
+        <label for="SongName" >Enter Song Title</label>
+        <input id="SongName" type="text" name="songName">
         <br>
-        <label for="ArtistID">Enter Artist: </label>
+        <label for="ArtistID" >Enter Artist Name</label>
         <input id="ArtistID" type="text" name="ArtistID">
         <br>
-        <label for="YearReleased">Year Released: </label>
-        <input id="YearReleased" type="text" name="YearReleased">
+        <label for="YearReleased" >Enter Year of Release</label>
+        <input id="YearReleased" type="number" name="YearReleased">
         <br>
         <input type="submit" value="Save">
-    </form>
-
-    <form action="/" method="GET">
-        <input type="submit" value="Cancel">
     </form>
 </body>
 </html>
