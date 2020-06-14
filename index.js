@@ -84,7 +84,7 @@
 
     app.post("/EditSong/:id", function (req, res){
         knex("Songs").where({SongID: req.body.SongID}).update({
-            SongName: req.body.SongName, ArtistID: req.body.ArtistID, YearReleased: req.body.YearReleased
+            SongName: req.body.SongName, ArtistID: req.body.ArtistID.toUpperCase(), YearReleased: req.body.YearReleased
         }).then(function (importantInfo){
             res.redirect("/");
         });
