@@ -65,6 +65,7 @@
         });
     });
 
+    //If you don't want the ArtistID value to be capitalized
     /*app.post("/AddSong", function(req, res){
         knex("Songs").insert(req.body).then(function(importantInfo){
             res.redirect("/");
