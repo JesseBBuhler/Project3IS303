@@ -10,12 +10,12 @@ Jarod Jones
 Zachary Sterling
 Brita Szymanski
 
-This program displays information from a database of songs. The each row can be edited and/or deleted. 
+This program displays information from a database of songs. Each row can be edited and/or deleted. 
 When editing a row in the database the user is redirected to another page, the info from that row automatically 
 populates into the fields on the edit song page, and then the user can make their changes and submit them. 
 There is an add button that allows the user to add new songs into the database, and there is also a button to start over, 
 which deletes everything in the table and then adds back in the original three songs that were in the database. 
-When the user submits any changes, additions, or deletes a file, they are redirected back to the main page.
+When the user submits any changes, additions, or deletes a record, they are redirected back to the main page.
 
 This file is the main file indicated in the package.json file; it gives the program access to the necessary modules, 
 sets up the port, connects to the Songs database, and provides instructions for each route used throughout the program.
@@ -27,7 +27,7 @@ let express = require("express");
 let app = express();
 
 //Give program access to knex module
-//Uses sqlite3 to get access to musiclibrary database
+//Uses sqlite3 to get access to the MusicLibrary database
 let knex = require("knex")({
     client:'sqlite3',
     connection: {
@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Create path to root directory (not necessary for this assignment)
 let path = require("path");
 
-//Turns ejs into html and helps browser display
+//Turns ejs into html and helps browser display it
 app.set("view engine", "ejs");
 
 //Listens for requests on port 3000
@@ -73,7 +73,7 @@ app.post("/DeleteSong/:id", (req, res) => {
 });
 
 //Gets the record from Songs where the SongID matches the id param 
-//then renders the editsong.ejs with the record data stored in songs
+//then renders the editsong.ejs with the record data stored in the songs variable
 app.get("/EditSong/:id", (req, res) => {
     knex("Songs").where("SongID", req.params.id).then(songs => {
         res.render("editsong", {songs : songs});
@@ -98,7 +98,7 @@ app.post("/cancel", (req, res) => {
 app.get("/AddSong", (req, res) => {
     res.render("addsong");
 });
-//Adds inputs from the user to the songs database and return to index.ejs
+//Adds inputs from the user to the Songs database and then returns to index.ejs
 app.post("/AddSong", (req, res) => {
     knex("Songs").insert(req.body).then(() => {
         res.redirect("/");

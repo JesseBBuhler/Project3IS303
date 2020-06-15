@@ -11,16 +11,16 @@ Jarod Jones
 Zachary Sterling
 Brita Szymanski
 
-This program displays information from a database of songs. The each row can be edited and/or deleted. 
+This program displays information from a database of songs. Each row can be edited and/or deleted. 
 When editing a row in the database the user is redirected to another page, the info from that row automatically 
 populates into the fields on the edit song page, and then the user can make their changes and submit them. 
 There is an add button that allows the user to add new songs into the database, and there is also a button to start over, 
 which deletes everything in the table and then adds back in the original three songs that were in the database. 
-When the user submits any changes, additions, or deletes a file, they are redirected back to the main page.
+When the user submits any changes, additions, or deletes a record, they are redirected back to the main page.
 
 This file is the main page; it uses the variable tunes, which has all of the database data passed to it, to construct
-the table with each record and its attributes. It contains calls to a  delete and edit route for each record, using the SongID as a
-parameter. It also contains routes for adding a new record and starting over- which will delete all song records and then
+the table with each record and its attributes. It contains calls to a delete and edit route for each record, using the SongID as a
+parameter. It also contains routes for adding a new record and starting over, which will delete all song records and then
 repopulate the database with the first three records as specified in the route.
 -->
 <head>
@@ -38,6 +38,8 @@ repopulate the database with the first three records as specified in the route.
             background-size: cover;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
+
+        /* Top Title portion of the page with Add Song and Start Over buttons*/
         .top
         {
             text-align: center; 
@@ -51,6 +53,8 @@ repopulate the database with the first three records as specified in the route.
             background-color: rgb(255,255,255,0.9);
             border-radius: 8px;
         }
+
+        /* Center section that contains the table*/
         .center
         {
             margin-left: 300px;
@@ -62,16 +66,19 @@ repopulate the database with the first three records as specified in the route.
 
             font-size: 14px;
         }
+
         td
         {
             padding: 10px;
             padding-left: 30px;
             padding-right: 30px;
         }
+
         th
         {
             text-decoration: underline;
         }
+
         input
         {
             background-color: black;
@@ -79,7 +86,6 @@ repopulate the database with the first three records as specified in the route.
             border-radius: 8px;
             padding: 7px;
             border: none;
-
         }
     </style>
 
@@ -91,6 +97,7 @@ repopulate the database with the first three records as specified in the route.
         <form action="/AddSong" method="get">
             <input type="submit" value="Add Song" name="AddSong">
         </form>
+
         <!--Form that uses a get method to look for the /StartOver Route-->
         <form action="/StartOver" method="get">
             <input type="submit" value="Start Over" name="StartOver">
@@ -98,44 +105,44 @@ repopulate the database with the first three records as specified in the route.
     </div>
 
     <div class="center">
-    <center>
-        <table>
-            <thread>
-                <tr>
-                    <th></th>
-                    <th>Song ID</th>
-                    <th>Song Name</th>
-                    <th>Artist ID</th>
-                    <th>Year Released</th>
-                    <th></th>
-                </tr>
-            </thread>
-            <tbody>
-                <!--Iterates through the knex data stored in the tunes var and creates a row for each record,
-                    filling in the attributes-->
-                <% for (var i = 0; i < tunes.length; i++) {%>
+        <center>
+            <table>
+                <thread>
                     <tr>
-                        <td>
-                            <!--Form that uses a post method to look for the /DeleteSong(param SongID) Route-->
-                            <form action="/DeleteSong/<%= tunes[i].SongID %>" method="post">
-                                <input type="submit" name="Delete" value="Delete"/>
-                            </form>
-                        </td>
-                        <td><%= tunes[i].SongID %></td>
-                        <td><%= tunes[i].SongName %></td>
-                        <td><%= tunes[i].ArtistID %></td>
-                        <td><%= tunes[i].YearReleased %></td>
-                        <td>
-                            <!--Form that uses a get method to look for the /EditSong(param SongID) Route-->
-                            <form action="/EditSong/ <%= tunes[i].SongID %>" method="get">
-                                <input type="submit" name="Edit" value="Edit"/>
-                            </form>
-                        </td>
+                        <th></th>
+                        <th>Song ID</th>
+                        <th>Song Name</th>
+                        <th>Artist ID</th>
+                        <th>Year Released</th>
+                        <th></th>
                     </tr>
-                <% } %>
-            </tbody>
-        </table> 
-    </center>   
+                </thread>
+                <tbody>
+                    <!--Iterates through the knex data stored in the tunes var and creates a row for each record,
+                        filling in the attributes-->
+                    <% for (var i = 0; i < tunes.length; i++) {%>
+                        <tr>
+                            <td>
+                                <!--Form that uses a post method to look for the /DeleteSong(param SongID) Route-->
+                                <form action="/DeleteSong/<%= tunes[i].SongID %>" method="post">
+                                    <input type="submit" name="Delete" value="Delete"/>
+                                </form>
+                            </td>
+                            <td><%= tunes[i].SongID %></td>
+                            <td><%= tunes[i].SongName %></td>
+                            <td><%= tunes[i].ArtistID %></td>
+                            <td><%= tunes[i].YearReleased %></td>
+                            <td>
+                                <!--Form that uses a get method to look for the /EditSong(param SongID) Route-->
+                                <form action="/EditSong/ <%= tunes[i].SongID %>" method="get">
+                                    <input type="submit" name="Edit" value="Edit"/>
+                                </form>
+                            </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>  
+        </center>  
     </div>
 
 </body>

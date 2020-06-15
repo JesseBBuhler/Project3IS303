@@ -11,12 +11,12 @@ Jarod Jones
 Zachary Sterling
 Brita Szymanski
 
-This program displays information from a database of songs. The each row can be edited and/or deleted. 
+This program displays information from a database of songs. Each row can be edited and/or deleted. 
 When editing a row in the database the user is redirected to another page, the info from that row automatically 
 populates into the fields on the edit song page, and then the user can make their changes and submit them. 
 There is an add button that allows the user to add new songs into the database, and there is also a button to start over, 
 which deletes everything in the table and then adds back in the original three songs that were in the database. 
-When the user submits any changes, additions, or deletes a file, they are redirected back to the main page.
+When the user submits any changes, additions, or deletes a record, they are redirected back to the main page.
 
 This file is the edit song page; it uses the variable songs, which contains the attributes for the song record the user
 wants to change as specified by the SongID parameter. The input fields for each attribute contain the pre-existant record 
@@ -37,6 +37,8 @@ data. It contains calls to two routes--one that will save the user's changes to 
             background-size: cover;
             font-family:Verdana, Geneva, Tahoma, sans-serif;
         }
+
+        /* Top section with Title*/
         .top
         {
             text-align: center; 
@@ -50,6 +52,8 @@ data. It contains calls to two routes--one that will save the user's changes to 
             background-color: rgb(255,255,255,0.9);
             border-radius: 8px;
         }
+
+        /* Center section that contains the main elements*/
         .center
         {
             margin-left: 300px;
@@ -61,6 +65,8 @@ data. It contains calls to two routes--one that will save the user's changes to 
 
             font-size: 14px;
         }
+
+        /* For the Save and Cancel Buttons*/
         .button
         {
             background-color: black;
@@ -73,32 +79,32 @@ data. It contains calls to two routes--one that will save the user's changes to 
 
 </head>
 <body>
-<center>
-    <div class="top">
-        <h2>Edit Song</h2>
-    </div>
-    <div class="center">
-        <!--Form that gathers record attributes from the user and uses a post method to look for the 
-            /EditSong(param SongID) Route-->
-        <form action="/EditSong/<%= songs[0].SongID %>" method="post">
+    <center>
+        <div class="top">
+            <h2>Edit Song</h2>
+        </div>
+        <div class="center">
+            <!--Form that gathers record attributes from the user and uses a post method to look for the 
+                /EditSong(param SongID) Route-->
+            <form action="/EditSong/<%= songs[0].SongID %>" method="post">
 
-            <label for="SongName">Enter Song Name:</label>
-            <input id="SongName" type="text" name="SongName" value="<%= songs[0].SongName %>"/>
-            <br><br>
-            <label for="ArtistID">Enter Artist ID:</label>
-            <input id="ArtistID" type="text" name="ArtistID" value="<%= songs[0].ArtistID %>"/>
-            <br><br>
-            <label for="YearReleased">Enter Year Released:</label>
-            <input id="YearReleased" type="text" name="YearReleased" value="<%= songs[0].YearReleased %>"/>
-            <br><br>
+                <label for="SongName">Enter Song Name:</label>
+                <input id="SongName" type="text" name="SongName" value="<%= songs[0].SongName %>"/>
+                <br><br>
+                <label for="ArtistID">Enter Artist ID:</label>
+                <input id="ArtistID" type="text" name="ArtistID" value="<%= songs[0].ArtistID %>"/>
+                <br><br>
+                <label for="YearReleased">Enter Year Released:</label>
+                <input id="YearReleased" type="text" name="YearReleased" value="<%= songs[0].YearReleased %>"/>
+                <br><br>
 
-            <input type="submit" class="button" value="Save">
-        </form>
-        <!--Form that uses a post method to look for the /cancel Route-->
-        <form action="/cancel" method="post">
-            <input type="submit" name="Cancel" class="button" value="Cancel">
-        </form>
-    </div>
-</center>
+                <input type="submit" class="button" value="Save">
+            </form>
+            <!--Form that uses a post method to look for the /cancel Route-->
+            <form action="/cancel" method="post">
+                <input type="submit" name="Cancel" class="button" value="Cancel">
+            </form>
+        </div>
+    </center>
 </body>
 </html>
