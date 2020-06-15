@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Joshua Card, Zachary Sterling, Shannon Murray, Brita Szymanski, Brayden Buhler, Jarod Jones.",
+  "author": "Shannon Murray, Jarod Jones, Jesse Brayden Buhler, Joshua Card, Zachary Sterling, Brita Szymanski",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",

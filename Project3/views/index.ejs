@@ -1,53 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="en"><!DOCTYPE html>
+<!--
+Project 3
+Section 002
+Team 1
+
+Shannon Murray
+Joshua Card
+Jesse Brayden Buhler
+Jarod Jones
+Zachary Sterling
+Brita Szymanski
+
+This program displays information from a database of songs. The each row can be edited and/or deleted. 
+When editing a row in the database the user is redirected to another page, the info from that row automatically 
+populates into the fields on the edit song page, and then the user can make their changes and submit them. 
+There is an add button that allows the user to add new songs into the database, and there is also a button to start over, 
+which deletes everything in the table and then adds back in the original three songs that were in the database. 
+When the user submits any changes, additions, or deletes a file, they are redirected back to the main page.
+
+This file is the main page; it uses the variable tunes, which has all of the database data passed to it, to construct
+the table with each record and its attributes. It contains calls to a  delete and edit route for each record, using the SongID as a
+parameter. It also contains routes for adding a new record and starting over- which will delete all song records and then
+repopulate the database with the first three records as specified in the route.
+-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>myWebsite</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css"/>
+    <title>Music Collection</title>
+    <!--CSS Styling-->
+    <style>
+
+        body
+        {
+            background-image: url(https://wallpapercave.com/wp/wp2480927.png);
+            background-size: 300px;
+            background-repeat: repeat-x;
+            background-size: cover;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .top
+        {
+            text-align: center; 
+            font-weight: bold;  
+            text-decoration: underline;
+            margin: 20px;
+            margin-left: 450px;
+            margin-right: 450px;
+            padding: 10px;
+            border: solid 4px black;
+            background-color: rgb(255,255,255,0.9);
+            border-radius: 8px;
+        }
+        .center
+        {
+            margin-left: 300px;
+            margin-right: 300px;
+            border: solid 4px black;
+            padding: 20px;
+            background-color: rgb(255,255,255,0.9);
+            border-radius: 8px;
+
+            font-size: 14px;
+        }
+        td
+        {
+            padding: 10px;
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+        th
+        {
+            text-decoration: underline;
+        }
+        input
+        {
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            padding: 7px;
+            border: none;
+
+        }
+    </style>
+
 </head>
-
 <body>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <form action="/AddSong" method="GET">
-                        <input type="submit" name="newSong" value="newSong">
-                    </form>
-                </th>
-                <th>Song ID</th>
-                <th>Song Name</th>
-                <th>ArtistID</th>
-                <th>Year Released</th>
-                <th>
-                    <form action="/StartOver" method="POST">
-                        <input type="submit" name="StartOver" value="Start Over">
-                    </form>
-                </th>
-            </tr>
-        </thead>
+    <div class="top">
+        <h2>Music Collection</h2>
+        <!--Form that uses a get method to look for the /AddSong Route-->
+        <form action="/AddSong" method="get">
+            <input type="submit" value="Add Song" name="AddSong">
+        </form>
+        <!--Form that uses a get method to look for the /StartOver Route-->
+        <form action="/StartOver" method="get">
+            <input type="submit" value="Start Over" name="StartOver">
+        </form>
+    </div>
 
-        <tbody>
-            <% for(var i = 0; i < song.length; i++) {%>
-              <tr>
-                  <td>
-                    <form action="/DeleteSong/<%= song[i].SongID %>" method="post">
-                        <input type="submit" name="Delete" value="Delete" />
-                    </form>
-                  </td>
-                  <td><%= song[i].SongID %></td>
-                  <td><%= song[i].SongName %></td>
-                  <td><%= song[i].ArtistID %></td>
-                  <td><%= song[i].YearReleased %></td>
-                  <td>
-                    <form action="/EditSong/<%= song[i].SongID %>" method="GET">
-                        <input type="submit" name="Edit" value="Edit" />
-                    </form>
-                  </td>
-              </tr>  
-            <%}%>
-        </tbody>
-    </table>
+    <div class="center">
+    <center>
+        <table>
+            <thread>
+                <tr>
+                    <th></th>
+                    <th>Song ID</th>
+                    <th>Song Name</th>
+                    <th>Artist ID</th>
+                    <th>Year Released</th>
+                    <th></th>
+                </tr>
+            </thread>
+            <tbody>
+                <!--Iterates through the knex data stored in the tunes var and creates a row for each record,
+                    filling in the attributes-->
+                <% for (var i = 0; i < tunes.length; i++) {%>
+                    <tr>
+                        <td>
+                            <!--Form that uses a post method to look for the /DeleteSong(param SongID) Route-->
+                            <form action="/DeleteSong/<%= tunes[i].SongID %>" method="post">
+                                <input type="submit" name="Delete" value="Delete"/>
+                            </form>
+                        </td>
+                        <td><%= tunes[i].SongID %></td>
+                        <td><%= tunes[i].SongName %></td>
+                        <td><%= tunes[i].ArtistID %></td>
+                        <td><%= tunes[i].YearReleased %></td>
+                        <td>
+                            <!--Form that uses a get method to look for the /EditSong(param SongID) Route-->
+                            <form action="/EditSong/ <%= tunes[i].SongID %>" method="get">
+                                <input type="submit" name="Edit" value="Edit"/>
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table> 
+    </center>   
+    </div>
+
 </body>
 </html>

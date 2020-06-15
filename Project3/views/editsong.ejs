@@ -1,26 +1,104 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Edit Song</title>
-    </head>
-    <body>
-        <form action="/EditSong/<%=id%>" method="POST">
-            <!--label for="StudnetID">Enter Student ID:</label>
-            <input id="StudentID" type="text" name="StudentID">
-            <br-->
+<html lang="en">
+<!--
+Project 3
+Section 002
+Team 1
+
+Shannon Murray
+Joshua Card
+Jesse Brayden Buhler
+Jarod Jones
+Zachary Sterling
+Brita Szymanski
+
+This program displays information from a database of songs. The each row can be edited and/or deleted. 
+When editing a row in the database the user is redirected to another page, the info from that row automatically 
+populates into the fields on the edit song page, and then the user can make their changes and submit them. 
+There is an add button that allows the user to add new songs into the database, and there is also a button to start over, 
+which deletes everything in the table and then adds back in the original three songs that were in the database. 
+When the user submits any changes, additions, or deletes a file, they are redirected back to the main page.
+
+This file is the edit song page; it uses the variable songs, which contains the attributes for the song record the user
+wants to change as specified by the SongID parameter. The input fields for each attribute contain the pre-existant record 
+data. It contains calls to two routes--one that will save the user's changes to the record, and one that will disregard them.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Song</title>
+    <!--CSS Styling-->
+    <style>
+
+        body
+        {
+            background-image: url(https://wallpapercave.com/wp/wp2480927.png);
+            background-size: 300px;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .top
+        {
+            text-align: center; 
+            font-weight: bold;  
+            text-decoration: underline;
+            margin: 20px;
+            margin-left: 450px;
+            margin-right: 450px;
+            padding: 10px;
+            border: solid 4px black;
+            background-color: rgb(255,255,255,0.9);
+            border-radius: 8px;
+        }
+        .center
+        {
+            margin-left: 300px;
+            margin-right: 300px;
+            border: solid 4px black;
+            padding: 20px;
+            background-color: rgb(255,255,255,0.9);
+            border-radius: 8px;
+
+            font-size: 14px;
+        }
+        .button
+        {
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            padding: 7px;
+            border: none;
+        }
+    </style>
+
+</head>
+<body>
+<center>
+    <div class="top">
+        <h2>Edit Song</h2>
+    </div>
+    <div class="center">
+        <!--Form that gathers record attributes from the user and uses a post method to look for the 
+            /EditSong(param SongID) Route-->
+        <form action="/EditSong/<%= songs[0].SongID %>" method="post">
+
             <label for="SongName">Enter Song Name:</label>
-            <input id="SongName" type="text" name="SongName">
-            <br>
-            <label for="Artist">Enter Artist:</label>
-            <input id="ArtistID" type="text" name="ArtistID">
-            <br>
-            <label for="YearReleased">Year Released:</label>
-            <input id="YearReleased" type="text" name="YearReleased">
-            <br>
-            <input type="submit" value="Save">
+            <input id="SongName" type="text" name="SongName" value="<%= songs[0].SongName %>"/>
+            <br><br>
+            <label for="ArtistID">Enter Artist ID:</label>
+            <input id="ArtistID" type="text" name="ArtistID" value="<%= songs[0].ArtistID %>"/>
+            <br><br>
+            <label for="YearReleased">Enter Year Released:</label>
+            <input id="YearReleased" type="text" name="YearReleased" value="<%= songs[0].YearReleased %>"/>
+            <br><br>
+
+            <input type="submit" class="button" value="Save">
         </form>
-        <form action="/" method="GET">
-            <input type="submit" value="Cancel">
+        <!--Form that uses a post method to look for the /cancel Route-->
+        <form action="/cancel" method="post">
+            <input type="submit" name="Cancel" class="button" value="Cancel">
         </form>
-    </body>
+    </div>
+</center>
+</body>
 </html>
